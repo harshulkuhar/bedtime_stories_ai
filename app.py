@@ -2,10 +2,9 @@ import streamlit as st
 import openai
 import json
 import logging
-from openai import OpenAI
 
 # Configure OpenAI
-client = OpenAI(api_key=st.secrets["OPENAI_KEY"])
+client = openai.OpenAI(api_key=st.secrets["OPENAI_KEY"])
 
 # Custom CSS
 def local_css():
