@@ -67,7 +67,11 @@ def get_system_prompt():
         8. Use gentle, soothing language appropriate for bedtime
         9. End with a clear, simple conclusion that reinforces the moral
         10. Incorporate culturally authentic elements naturally into the story
-        11. For Hinglish stories:
+        11. When writing about animal characters:
+            - Keep animal behavior realistic and natural
+            - Animals should not perform human activities (no cooking, cleaning, going to school, etc.)
+            - Focus on natural animal behaviors like hunting, foraging, building nests, etc.
+        12. For Hinglish stories:
             - Write the ENTIRE story in Hinglish (both narration and dialogues)
             - Use Roman script throughout
             - Use natural Hindi-English mixed language that Indian children commonly use and understand
