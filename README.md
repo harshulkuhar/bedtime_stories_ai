@@ -36,27 +36,7 @@ pip install -r requirements.txt
    streamlit run app.py
    ```
 
-3. Customize Your Story:
-   - **Language Options** 🗣️
-     - English: Traditional English storytelling
-     - Hindi: Stories in Hindi
-     - Hinglish: Natural mix of Hindi-English, written in Roman script
-   
-   - **Character Types** 🎭
-     - People: Stories featuring human characters
-     - Animals: Tales with animal characters (with realistic animal behaviors)
-     - Both People & Animals: Interactive stories between humans and animals
-   
-   - **Moral Lessons** 🌟
-     - Choose from: Kindness, Honesty, Sharing, Patience, Courage, 
-       Friendship, Love, Respect, Responsibility, Gratitude, 
-       Empathy, Hard Work, Consistency
-   
-   - **Cultural Contexts** 🌍
-     - Available cultures: American, British, Indian, French, Spanish
-     - Each story incorporates authentic cultural elements and traditions
-
-4. Generate and Save:
+3. Generate and Save:
    - Click "✨ Create Magical Story ✨" to generate your story
    - Use "🔄 Generate New Story" to create different versions
    - Download your favorite stories using "📥 Save Story"
