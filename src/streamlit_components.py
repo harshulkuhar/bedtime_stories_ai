@@ -53,7 +53,10 @@ def render_story_output(story):
 def render_story_generator():
     """Render the story generator section."""
     if st.button("✨ Create Magical Story ✨", type="primary"):
-        st.text("Curating a magical story just for you...")
+        message = st.empty()
+        message.text("Curating a magical story just for you...")
         with st.spinner("🪄 Weaving your magical bedtime story..."):
-            return True
+            result = True
+        message.empty()  # This will clear the message
+        return result
     return False
