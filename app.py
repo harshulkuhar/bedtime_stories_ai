@@ -173,7 +173,7 @@ def main():
 
         setting = st.selectbox(
             "Pick Your Story World 🎭",
-            ["Animals", "People", "People & Animals"],
+            ["People", "Animals", "People & Animals"],
             help="Choose who the story will be about"
         )
 
