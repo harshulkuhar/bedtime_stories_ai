@@ -21,11 +21,24 @@ def get_story_prompt(language, setting, moral, culture):
     """Construct the story generation prompt."""
     setting_requirements = get_story_requirements(setting)
     
+    language_requirements = ""
+    if language.lower() == "hinglish":
+        language_requirements = """
+    Language Requirements:
+    - Write the ENTIRE story in Hinglish using Roman script
+    - Both narrative parts and dialogues should be in Hinglish
+    - Use natural Hindi-English word mixing that Indian children commonly use
+    - Example format:
+      "Ek time ki baat hai, jab ek chota sa boy Rahul apne grandparents ke ghar gaya. Wahan usko ek magical garden mila. 'Wow!' Rahul bola, 'Kitna beautiful garden hai!'"
+    """
+    
     return f"""Generate a bedtime story for children up to 5 years old with the following parameters:
     Language: {language}
     Setting: {setting}
     Moral: {moral}
-    Cultural Context: {culture}{setting_requirements}
+    Cultural Context: {culture}
+    {setting_requirements}
+    {language_requirements}
     
     The story should be:
     1. Simple and easy to understand
@@ -51,9 +64,14 @@ def get_system_prompt():
         5. Include 2-3 characters maximum
         6. Avoid complex plots or scary elements
         7. Use short sentences and paragraphs
-        8. Include gentle, soothing language appropriate for bedtime
+        8. Use gentle, soothing language appropriate for bedtime
         9. End with a clear, simple conclusion that reinforces the moral
-        10. Incorporate culturally authentic elements naturally into the story"""
+        10. Incorporate culturally authentic elements naturally into the story
+        11. For Hinglish stories:
+            - Write the ENTIRE story in Hinglish (both narration and dialogues)
+            - Use Roman script throughout
+            - Use natural Hindi-English mixed language that Indian children commonly use and understand
+            - Example: "Ek choti si ladki Priya rehti thi. Uske paas ek cute sa puppy tha. Wo har roz uske saath park mein play karti thi."""
 
 def generate_story(language, setting, moral, culture):
     """
