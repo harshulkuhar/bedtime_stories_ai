@@ -56,7 +56,7 @@ def generate_story(language, setting, moral, culture):
     
     Args:
         language (str): The language to generate the story in
-        setting (str): The story setting (Animals/People/Both)
+        setting (str): The story setting (People/Animals/People & Animals)
         moral (str): The moral lesson to convey
         culture (str): The cultural context for the story
     
@@ -173,7 +173,7 @@ def main():
 
         setting = st.selectbox(
             "Pick Your Story World 🎭",
-            ["Animals", "People", "Both"],
+            ["Animals", "People", "People & Animals"],
             help="Choose who the story will be about"
         )
 
