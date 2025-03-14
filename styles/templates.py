@@ -24,10 +24,11 @@ def get_sidebar_content():
             <h3>✨ How to Use</h3>
             <p>
                 1. Choose your preferred language<br>
-                2. Select the story setting<br>
-                3. Pick a moral lesson<br>
-                4. Click 'Create Magical Story'<br>
-                5. Save or generate new stories!
+                2. Select your preferred Characters<br>
+                3. Pick a Moral Lesson<br>
+                4. Select the Culture<br>
+                5. Click 'Create Magical Story'<br>
+                6. Save or generate new stories!
             </p>
         </div>
     """
