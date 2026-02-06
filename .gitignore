@@ -1,2 +1,6 @@
 reference.py
 .streamlit/
+*.pyc
+*.pyo
+*.pyd
+__pycache__/

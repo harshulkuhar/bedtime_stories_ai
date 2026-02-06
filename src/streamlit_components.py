@@ -53,4 +53,4 @@ def render_story_output(story):
 
 def render_story_generator():
     """Render the story generator section."""
-    return st.button("✨ Create Magical Story ✨", type="primary")
+    return st.button("✨ Generate Story ✨", type="primary")

@@ -2,10 +2,13 @@ import openai
 import logging
 import streamlit as st
 
+from src.agents.graph import generate_story_with_agents, generate_story_with_streaming
+
 # Configure OpenAI
 client = openai.OpenAI(
     api_key=st.secrets["OPENAI_KEY"]
-    )
+)
+
 
 def get_story_requirements(setting):
     """Get specific requirements based on story setting."""
@@ -16,6 +19,7 @@ def get_story_requirements(setting):
     - Create meaningful interaction between the human and animal character
     - Both the human and animal should contribute to the story's resolution"""
     return ""
+
 
 def get_story_prompt(language, setting, moral, culture):
     """Construct the story generation prompt."""
@@ -51,6 +55,7 @@ def get_story_prompt(language, setting, moral, culture):
     8. Be respectful and inclusive in its representation
     """
 
+
 def get_system_prompt():
     """Get the system prompt for story generation."""
     return """You are a specialized children's bedtime story writer. Follow these strict guidelines:
@@ -77,22 +82,16 @@ def get_system_prompt():
             - Use natural Hindi-English mixed language that Indian children commonly use and understand
             - Example: "Ek choti si ladki Priya rehti thi. Uske paas ek cute sa puppy tha. Wo har roz uske saath park mein play karti thi."""
 
-def generate_story(language, setting, moral, culture):
+
+def generate_story_simple(language, setting, moral, culture):
     """
-    Generate a bedtime story based on given parameters using OpenAI's GPT-4.
+    Generate a story using simple single-shot LLM call.
     
-    Args:
-        language (str): The language to generate the story in
-        setting (str): The story setting (People/Animals/Both People & Animals)
-        moral (str): The moral lesson to convey
-        culture (str): The cultural context for the story
-    
-    Returns:
-        str: Generated story text or None if generation fails
+    This is the original method, kept as fallback.
     """
     try:
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-5-mini",
             messages=[
                 {"role": "system", "content": get_system_prompt()},
                 {"role": "user", "content": get_story_prompt(language, setting, moral, culture)}
@@ -104,3 +103,56 @@ def generate_story(language, setting, moral, culture):
     except Exception as e:
         logging.error(f"Error generating story: {str(e)}")
         return None
+
+
+def generate_story(language, setting, moral, culture, use_agents=True):
+    """
+    Generate a bedtime story based on given parameters.
+    
+    Args:
+        language (str): The language to generate the story in
+        setting (str): The story setting (People/Animals/Both People & Animals)
+        moral (str): The moral lesson to convey
+        culture (str): The cultural context for the story
+        use_agents (bool): Whether to use the LangGraph agent pipeline
+    
+    Returns:
+        str: Generated story text or None if generation fails
+    """
+    if use_agents:
+        try:
+            api_key = st.secrets["OPENAI_KEY"]
+            story = generate_story_with_agents(
+                language=language,
+                setting=setting,
+                moral=moral,
+                culture=culture,
+                api_key=api_key
+            )
+            if story:
+                return story
+            # Fall back to simple mode if agents fail
+            logging.warning("Agent generation failed, falling back to simple mode")
+            return generate_story_simple(language, setting, moral, culture)
+        except Exception as e:
+            logging.error(f"Error in agent generation: {str(e)}")
+            return generate_story_simple(language, setting, moral, culture)
+    else:
+        return generate_story_simple(language, setting, moral, culture)
+
+
+def generate_story_stream(language, setting, moral, culture):
+    """
+    Generate a story with streaming for progress display.
+    
+    Yields (stage, data) tuples for UI updates.
+    """
+    api_key = st.secrets["OPENAI_KEY"]
+    yield from generate_story_with_streaming(
+        language=language,
+        setting=setting,
+        moral=moral,
+        culture=culture,
+        api_key=api_key
+    )
+
